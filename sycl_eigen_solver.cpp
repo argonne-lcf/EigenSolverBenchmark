@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     }
 
     /* Compute on device */
-    sycl::queue device_queue(sycl::gpu_selector{});
+    sycl::queue device_queue(sycl::gpu_selector_v);
 
     double *A_dev = sycl::malloc_device<double>(lda * n, device_queue);
     double *w_dev = sycl::malloc_device<double>(n, device_queue);
