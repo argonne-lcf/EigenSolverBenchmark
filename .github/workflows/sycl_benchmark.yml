@@ -23,7 +23,11 @@ jobs:
     - name: Compile
       run: |
         source /opt/intel/oneapi/setvars.sh
-        icpx -fsycl -DMKL_ILP64 -m64 -I${MKLROOT}/include -L${MKLROOT}/lib/intel64 -L/opt/intel/oneapi/compiler/latest/lib -lsycl -lmkl_sycl -lmkl_intel_ilp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lm -ldl sycl_eigen_solver.cpp -o sycl_eigen_solver
+        icpx -fsycl -O3 sycl_eigen_solver.cpp \
+            -DMKL_ILP64 -I${MKLROOT}/include \
+            -L${MKLROOT}/lib/intel64 \
+            -lmkl_sycl -lmkl_intel_ilp64 -lmkl_core -lmkl_sequential \
+            -o sycl_eigen_solver
     
     - name: Run benchmark
       run: |
